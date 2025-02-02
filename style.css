@@ -9,7 +9,18 @@
 
 body {
   font-family: "Poppins", sans-serif;
+  background-color: rgb(255, 255, 255);
+  overflow: scroll; /* Allow scrolling */
+  background-image: url('./assets/wintery-sunburst.svg');
+  background-size: cover; /* Adjusts the size to cover the full screen */
 }
+
+body::-webkit-scrollbar {
+  display: none; /* Hide scrollbars */
+}
+
+
+
 
 html {
   scroll-behavior: smooth;
@@ -19,6 +30,11 @@ p {
   color: rgb(85, 85, 85);
 }
 
+.icon.arrow {
+  background-color: rgb(0, 255, 234);
+  display: block;
+  margin: 20px auto; /* Adds space around the arrow */
+}
 /* TRANSITION */
 
 a,
@@ -31,6 +47,10 @@ a,
 nav,
 .nav-links {
   display: flex;
+  gap: 1.5rem; /* Space between each link */
+  font-size: 1.2rem; /* Adjust font size */
+  font-weight: bold; /* Make the text bold */
+  text-transform: uppercase; /* Make text uppercase */
 }
 
 nav {
@@ -46,7 +66,7 @@ nav {
 }
 
 a {
-  color: black;
+  color: rgb(0, 255, 234);
   text-decoration: none;
   text-decoration-color: white;
 }
@@ -60,10 +80,12 @@ a:hover {
 
 .logo {
   font-size: 2rem;
+  color: rgb(0, 255, 234);
 }
 
 .logo:hover {
   cursor: default;
+  color: rgb(255, 255, 255)
 }
 
 /* HAMBURGER MENU */
@@ -90,7 +112,7 @@ a:hover {
   width: 100%;
   height: 2px;
   background-color: black;
-  transition: all 0.3 ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .menu-links {
@@ -101,7 +123,7 @@ a:hover {
   width: fit-content;
   max-height: 0;
   overflow: hidden;
-  transition: all 0.3 ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .menu-links a {
@@ -111,7 +133,7 @@ a:hover {
   font-size: 1.5rem;
   color: black;
   text-decoration: none;
-  transition: all 0.3 ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .menu-links li {
@@ -134,18 +156,6 @@ a:hover {
   transform: rotate(-45deg) translate(10px, -5px);
 }
 
-.hamburger-icon span:first-child {
-  transform: none;
-}
-
-.hamburger-icon span:first-child {
-  opacity: 1;
-}
-
-.hamburger-icon span:first-child {
-  transform: none;
-}
-
 /* SECTIONS */
 
 section {
@@ -158,6 +168,9 @@ section {
 
 .section-container {
   display: flex;
+  gap: 4rem;
+  height: 50%;
+  justify-content: center; /* Centers the container horizontally */
 }
 
 /* PROFILE SECTION */
@@ -167,6 +180,7 @@ section {
   justify-content: center;
   gap: 5rem;
   height: 80vh;
+  margin-bottom: 20rem;
 }
 
 .section__pic-container {
@@ -174,6 +188,31 @@ section {
   height: 400px;
   width: 400px;
   margin: auto 0;
+  box-shadow: 0 0 20px 15px rgb(0, 255, 234); /* Grey faded shadow */
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;  /* Make sure the container doesn't overflow its boundaries */
+  opacity: 0;  /* Initially set the opacity to 0 (invisible) */
+  transition: opacity 1s ease-in-out; /* Add transition effect for fading */
+}
+
+
+
+/* Add a class to make it visible with fade-in effect */
+.section__pic-container.visible {
+  opacity: 1; /* Fade in to full visibility */
+}
+
+.section__pic-container img {
+  width: 100%;   /* Ensures the image takes up the full width of the container */
+  height: 100%;  /* Ensures the image takes up the full height of the container */
+  object-fit: cover;  /* Ensures the image covers the circle without distortion */
+}
+
+.profile-pic:hover {
+  filter: brightness(1.2); /* Brighten the profile picture on hover */
+  transform: scale(1.05); /* Slight zoom effect on image */
+  transition: all 0.3s ease-in-out;
 }
 
 .section__text {
@@ -187,16 +226,58 @@ section {
 
 .section__text__p1 {
   text-align: center;
+  
 }
 
 .section__text__p2 {
   font-size: 1.75rem;
   margin-bottom: 1rem;
+  color: rgb(0, 255, 234);
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflowed text */
+  position: relative;
+  display: inline-block; /* Ensures that words are treated individually */
+  width: 0; /* Initially hide the text */
+  animation: typing 3s steps(20) 1s forwards, cursor-blink 0.75s step-end infinite; /* Typing and cursor animation */
 }
+
+.section__text__p2::after {
+  content: '|'; /* Create a vertical bar as the cursor */
+  position: absolute;
+  right: 0; /* Position cursor at the end of the text */
+  color: rgb(0, 255, 234);
+  animation: blink 0.75s step-end infinite; /* Animation for blinking cursor */
+  margin-left: 0; /* Ensure no margin between the text and the cursor */
+}
+
+/* Keyframes for typing */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Keyframes for blinking cursor */
+@keyframes blink {
+  50% {
+    opacity: 0; /* Makes the cursor disappear halfway through the animation */
+  }
+}
+
+
 
 .title {
   font-size: 3rem;
   text-align: center;
+  color: rgb(0, 255, 234);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
 }
 
 #socials-container {
@@ -204,13 +285,20 @@ section {
   justify-content: center;
   margin-top: 1rem;
   gap: 1rem;
+  
+}
+
+.icon2 {
+  cursor: pointer;
+  height: 2rem;
+  filter: invert(51%) sepia(95%) saturate(320%) hue-rotate(150deg) brightness(100%) contrast(100%);
 }
 
 /* ICONS */
 
 .icon {
-  cursor: pointer;
   height: 2rem;
+  fill: rgb(0, 255, 234); /* Change to your desired color */
 }
 
 /* BUTTONS */
@@ -251,20 +339,18 @@ section {
 
 .btn-color-2 {
   background: none;
+  
 }
 
 .btn-color-2:hover {
   border: rgb(255, 255, 255) 0.1rem solid;
 }
 
-.btn-container {
-  gap: 1rem;
-}
-
 /* ABOUT SECTION */
 
 #about {
   position: relative;
+  margin-bottom: 20rem;
 }
 
 .about-containers {
@@ -276,15 +362,25 @@ section {
 .about-details-container {
   justify-content: center;
   flex-direction: column;
+  color: rgb(0, 255, 234);
+  
+
+  
 }
 
 .about-containers,
 .about-details-container {
   display: flex;
+  
+  
 }
 
-.about-pic {
-  border-radius: 2rem;
+
+.about-pic:hover {
+  filter: brightness(1.2); /* Brighten the profile picture on hover */
+  transform: scale(1.05); /* Slight zoom effect on image */
+  transition: all 0.3s ease-in-out;
+  
 }
 
 .arrow {
@@ -293,31 +389,40 @@ section {
   bottom: 2.5rem;
 }
 
+
+
 .details-container {
   padding: 1.5rem;
   flex: 1;
-  background: white;
+  background-color: transparent;
   border-radius: 2rem;
   border: rgb(53, 53, 53) 0.1rem solid;
-  border-color: rgb(163, 163, 163);
   text-align: center;
 }
 
-.section-container {
-  gap: 4rem;
-  height: 80%;
+.details-container,
+.color-container {
+  border: none;
 }
 
-.section__pic-container {
-  height: 400px;
-  width: 400px;
-  margin: auto 0;
+
+.text-container p {
+  font-family: 'Roboto', sans-serif; /* Clean, modern font */
+  font-size: 18px; /* Readable size */
+  line-height: 1.6; /* Improves readability with proper spacing */
+  color: #bdacac; /* Dark grey for a professional look */
+  max-width: 800px; /* Limits the line length for easier reading */
+  margin: 0 auto 1.5rem; /* Centers the text block and adds space below */
+  text-align: left; /* Left-align text */
+  letter-spacing: 0.5px; /* Slight letter spacing for a refined look */
+  font-weight: 400; /* Regular weight for clear, professional text */
 }
 
 /* EXPERIENCE SECTION */
 
 #experience {
   position: relative;
+  margin-bottom: 20rem;
 }
 
 .experience-sub-title {
@@ -329,7 +434,7 @@ section {
 
 .experience-details-container {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   flex-direction: column;
 }
 
@@ -339,7 +444,9 @@ section {
   flex-wrap: wrap;
   flex-direction: row;
   gap: 2.5rem;
-  justify-content: space-around;
+  justify-content: flex-start; /* Aligns items to the left side */
+  color: rgb(255, 255, 255);
+
 }
 
 article {
@@ -347,40 +454,54 @@ article {
   width: 10rem;
   justify-content: space-around;
   gap: 0.5rem;
+  
+  
 }
 
 article .icon {
   cursor: default;
+  
 }
 
-/* PROJECTS SECTION */
+article .ticks {
+  filter: invert(30%) sepia(100%) saturate(500%) hue-rotate(190deg);
+  height: 2rem;
+}
+
+ 
+
 
 #projects {
   position: relative;
 }
 
-.color-container {
-  border-color: rgb(163, 163, 163);
-  background: rgb(250, 250, 250);
-}
 
 .project-img {
-  border-radius: 2rem;
-  width: 90%;
-  height: 90%;
+  width: 100%;  /* Takes up full width of the container */
+  height: 400px;  /* Make the height taller */
+  object-fit: cover;  /* Ensures the image covers the box without distortion */
+  border: 7px solid #575353;  /* Optional: Border for the image */
+  border-radius: 1rem;  /* Optional: Border radius for rounded corners */
 }
+
+
+.project-img:hover {
+  box-shadow: 0px 0px 15px  rgb(0, 255, 234); /* Glow effect on hover */
+}
+
+
 
 .project-title {
   margin: 1rem;
-  color: black;
+  color: rgb(255, 255, 255);
 }
 
 .project-btn {
-  color: black;
+  color: rgb(255, 255, 255);
   border-color: rgb(163, 163, 163);
 }
 
-/* CONTACT */
+/* CONTACT SECTION */
 
 #contact {
   display: flex;
@@ -392,12 +513,22 @@ article .icon {
 .contact-info-upper-container {
   display: flex;
   justify-content: center;
-  border-radius: 2rem;
-  border: rgb(53, 53, 53) 0.1rem solid;
-  border-color: rgb(163, 163, 163);
-  background: (250, 250, 250);
+  border-radius: 8rem;
+  border: rgb(53, 53, 53) 0.3rem solid;
+  border-color: rgb(53, 53, 53);
+  background-color: rgb(0, 255, 234);
   margin: 2rem auto;
   padding: 0.5rem;
+  
+  /* Box shadow for depth */
+  box-shadow: 0 0 15px rgb(54, 138, 216);
+  transition: all 0.3s ease-in-out;  /* Smooth transition for hover */
+}
+
+/* Hover effect */
+.contact-info-upper-container:hover {
+  box-shadow: 0 0 20px rgba(0, 238, 255, 0.7);  /* Glow effect on hover */
+  transform: translateY(-5px);  /* Slight lift effect */
 }
 
 .contact-info-container {
@@ -406,18 +537,23 @@ article .icon {
   justify-content: center;
   gap: 0.5rem;
   margin: 1rem;
+  
 }
 
-.contact-info-container p {
+.contact-info-container a {
   font-size: larger;
+  color: rgb(0, 0, 0);
 }
 
 .contact-icon {
-  cursor: default;
+  cursor: default; /*icon for contact at for linkedin*/
+  filter: invert(51%) sepia(95%) saturate(320%) hue-rotate(150deg) brightness(100%) contrast(100%);
+  
 }
 
 .email-icon {
-  height: 2.5rem;
+  height: 2.5rem; /*icon for contact at for Email*/
+  filter: invert(51%) sepia(95%) saturate(320%) hue-rotate(150deg) brightness(100%) contrast(100%);
 }
 
 /* FOOTER SECTION */
@@ -430,3 +566,7 @@ footer {
 footer p {
   text-align: center;
 }
+
+/* PORTFOLIO SECTION */
+
+
